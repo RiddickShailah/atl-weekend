@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>ATL Weekend, Oct 9 to 11</title>
-<meta name="description" content="Our Atlanta weekend plan for October 9 to 11, 2026: weather, what to wear, the day-by-day plan, prices and drive times.">
+<meta name="description" content="Our Atlanta weekend plan for October 9 to 11, 2026: weather, traffic, the day-by-day plan, food near every stop, prices and drive times.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Overpass:wght@400;600;800&display=swap" rel="stylesheet">
@@ -15,9 +15,11 @@
     --ink: #1C2421;
     --muted: #5B6763;
     --rule: #D3DAD7;
+    --soft: #E8ECEA;
     --fri: #C98A00;
     --sat: #1F6FB2;
     --sun: #C8102E;
+    --warn: #B4540A;
     --focus: #1F6FB2;
   }
   @media (prefers-color-scheme: dark) {
@@ -27,9 +29,11 @@
       --ink: #E7EDEA;
       --muted: #9BA8A3;
       --rule: #2E3936;
+      --soft: #222C29;
       --fri: #E9AC2A;
       --sat: #5AA2E0;
       --sun: #F0546C;
+      --warn: #F0954A;
       --focus: #5AA2E0;
     }
   }
@@ -77,9 +81,9 @@
     font-weight: 800;
     margin: 0 0 14px;
   }
-  .lede { font-size: 20px; color: var(--muted); margin: 0 0 32px; max-width: 34ch; }
+  .lede { font-size: 20px; color: var(--muted); margin: 0 0 32px; max-width: 36ch; }
 
-  /* Line map: the one bold element */
+  /* Line map */
   .linemap { display: grid; gap: 14px; }
   .line {
     display: grid; grid-template-columns: 54px 1fr; align-items: center; gap: 12px;
@@ -91,20 +95,14 @@
     content: ""; position: absolute; left: 0; right: 0; top: 50%; height: 8px; transform: translateY(-50%);
     border-radius: 4px; background: var(--c);
   }
-  .stop {
-    position: relative; width: 22px; height: 22px; border-radius: 50%;
-    background: var(--surface); border: 5px solid var(--c);
-  }
-  .line:hover .track::before { filter: brightness(1.08); }
+  .stop { position: relative; width: 22px; height: 22px; border-radius: 50%; background: var(--surface); border: 5px solid var(--c); }
+  .stop.opt { border-style: dashed; border-width: 3px; }
   .line-caption { grid-column: 2; font-size: 14px; color: var(--muted); margin-top: -6px; }
 
   /* Sections */
   section { padding: 44px 0 8px; scroll-margin-top: 56px; }
-  h2 {
-    font-size: 30px; line-height: 1.1; font-weight: 800; letter-spacing: -0.01em;
-    margin: 0 0 6px;
-  }
-  .sub { color: var(--muted); margin: 0 0 22px; }
+  h2 { font-size: 30px; line-height: 1.1; font-weight: 800; letter-spacing: -0.01em; margin: 0 0 6px; }
+  .sub { color: var(--muted); margin: 0 0 22px; max-width: 60ch; }
   h3 { font-size: 22px; font-weight: 800; margin: 0; }
 
   .card { background: var(--surface); border: 1px solid var(--rule); border-radius: 10px; }
@@ -126,32 +124,73 @@
     .wx:nth-child(n+3) { border-top: 1px solid var(--rule); }
   }
 
+  /* Traffic */
+  .traffic { list-style: none; margin: 0; padding: 0; }
+  .traffic li { display: grid; grid-template-columns: 132px 1fr; gap: 16px; padding: 13px 16px; border-top: 1px solid var(--rule); }
+  .traffic li:first-child { border-top: 0; }
+  .traffic .when { font-weight: 800; color: var(--warn); font-size: 15px; line-height: 1.35; }
+  .traffic b { display: block; }
+  .traffic span { color: var(--muted); font-size: 15px; }
+  @media (max-width: 560px) { .traffic li { grid-template-columns: 1fr; gap: 2px; } }
+
   /* Day plans */
-  .day-head { display: flex; align-items: baseline; gap: 12px; margin: 30px 0 4px; }
+  .day-head { display: flex; align-items: baseline; flex-wrap: wrap; gap: 4px 12px; margin: 30px 0 4px; }
   .day-head .tag { font-weight: 600; color: var(--muted); }
   .route { list-style: none; margin: 12px 0 0; padding: 0; position: relative; }
-  .route::before {
-    content: ""; position: absolute; left: 10px; top: 14px; bottom: 14px; width: 6px; border-radius: 3px; background: var(--c);
-  }
-  .route li { position: relative; padding: 0 0 22px 44px; }
-  .route li::before {
+  .route::before { content: ""; position: absolute; left: 10px; top: 14px; bottom: 14px; width: 6px; border-radius: 3px; background: var(--c); }
+  .route > li { position: relative; padding: 0 0 26px 44px; }
+  .route > li::before {
     content: ""; position: absolute; left: 2px; top: 4px; width: 22px; height: 22px; border-radius: 50%;
     background: var(--surface); border: 5px solid var(--c); box-sizing: border-box;
   }
-  .route li.optional::before { border-style: dashed; border-width: 3px; }
+  .route > li.optional::before { border-style: dashed; border-width: 3px; }
   .time { font-weight: 800; font-size: 15px; color: var(--muted); display: block; }
+  .flag { font-weight: 600; font-size: 13px; color: var(--ink); background: var(--soft); border-radius: 4px; padding: 1px 7px; margin-left: 6px; white-space: nowrap; }
   .stopname { font-weight: 800; font-size: 19px; line-height: 1.25; display: block; margin: 1px 0 3px; }
   .note { margin: 0 0 4px; }
   .meta { font-size: 15px; color: var(--muted); margin: 0; }
   .meta a { color: var(--ink); font-weight: 600; }
+  .or { margin: 10px 0 0; padding: 12px 14px; }
+  .or p { margin: 0; }
+  .or p + p { margin-top: 8px; padding-top: 8px; border-top: 1px solid var(--rule); }
+  .or b { display: block; }
+
+  /* Food */
+  details.food { margin-top: 10px; }
+  details.food summary {
+    cursor: pointer; font-weight: 600; font-size: 15px; display: inline-flex; align-items: center; gap: 6px;
+    list-style: none; padding: 4px 10px; border: 1px solid var(--rule); border-radius: 999px; background: var(--surface);
+  }
+  details.food summary::-webkit-details-marker { display: none; }
+  details.food summary::before { content: "+"; font-weight: 800; width: 10px; }
+  details.food[open] summary::before { content: "\2013"; }
+  .foodbox { margin-top: 8px; overflow: hidden; }
+  .sortbar { display: flex; align-items: center; gap: 8px; padding: 10px 12px; border-bottom: 1px solid var(--rule); font-size: 14px; color: var(--muted); flex-wrap: wrap; }
+  .sortbar button {
+    font: inherit; font-size: 14px; font-weight: 600; color: var(--ink); background: transparent;
+    border: 1px solid var(--rule); border-radius: 6px; padding: 3px 10px; cursor: pointer;
+  }
+  .sortbar button[aria-pressed="true"] { background: var(--ink); color: var(--surface); border-color: var(--ink); }
+  table.ftable { width: 100%; border-collapse: collapse; font-size: 15px; min-width: 0; }
+  .ftable td { padding: 9px 12px; border-top: 1px solid var(--rule); vertical-align: top; }
+  .ftable tr:first-child td { border-top: 0; }
+  .ftable .nm a { font-weight: 800; text-decoration: none; }
+  .ftable .nm a:hover { text-decoration: underline; }
+  .ftable .nm small { display: block; color: var(--muted); font-size: 13px; }
+  .ftable .cu { color: var(--muted); }
+  .ftable .num { text-align: right; white-space: nowrap; }
+  .ftable .grp td { background: var(--soft); font-weight: 800; font-size: 13px; color: var(--muted); padding: 5px 12px; }
+  @media (max-width: 560px) {
+    .ftable .cu { display: none; }
+    .ftable .nm small.c2 { display: block; }
+  }
+  .ftable .nm small.c2 { display: none; }
+  @media (max-width: 560px) { .ftable .nm small.c2 { display: block; } }
 
   /* Service picker */
   .picker { padding: 16px; margin: 6px 0 4px; }
   .seg { display: inline-flex; border: 1px solid var(--rule); border-radius: 8px; overflow: hidden; margin: 10px 0 12px; }
-  .seg button {
-    font: inherit; font-weight: 600; font-size: 16px; padding: 8px 16px; border: 0;
-    background: transparent; color: var(--ink); cursor: pointer;
-  }
+  .seg button { font: inherit; font-weight: 600; font-size: 16px; padding: 8px 16px; border: 0; background: transparent; color: var(--ink); cursor: pointer; }
   .seg button + button { border-left: 1px solid var(--rule); }
   .seg button[aria-pressed="true"] { background: var(--sun); color: #fff; }
   .picker p { margin: 0; }
@@ -180,21 +219,21 @@
 
   /* Prices */
   .table-wrap { overflow-x: auto; }
-  table { width: 100%; border-collapse: collapse; font-size: 16px; min-width: 480px; }
-  th, td { text-align: left; padding: 10px 16px; border-top: 1px solid var(--rule); vertical-align: top; }
-  thead th { border-top: 0; font-size: 14px; color: var(--muted); font-weight: 600; }
-  td:first-child { font-weight: 600; }
-  td:last-child, th:last-child { white-space: nowrap; }
+  table.ptable { width: 100%; border-collapse: collapse; font-size: 16px; min-width: 480px; }
+  .ptable th, .ptable td { text-align: left; padding: 10px 16px; border-top: 1px solid var(--rule); vertical-align: top; }
+  .ptable thead th { border-top: 0; font-size: 14px; color: var(--muted); font-weight: 600; }
+  .ptable td:first-child { font-weight: 600; }
+  .ptable td:last-child, .ptable th:last-child { white-space: nowrap; }
 
   footer { padding: 40px 0 56px; color: var(--muted); font-size: 15px; }
-  footer p { margin: 0 0 6px; max-width: 60ch; }
+  footer p { margin: 0 0 6px; max-width: 62ch; }
   .print { font: inherit; font-weight: 600; font-size: 15px; background: none; border: 1px solid var(--rule); color: var(--ink); border-radius: 8px; padding: 8px 14px; cursor: pointer; margin-top: 12px; }
 
   @media print {
-    nav, .print { display: none; }
+    nav, .print, .sortbar { display: none; }
     body { background: #fff; color: #000; font-size: 12pt; }
     header { padding-top: 0; }
-    section { break-inside: avoid-page; padding-top: 18px; }
+    section { padding-top: 18px; }
     .card { border-color: #bbb; }
   }
 </style>
@@ -204,11 +243,12 @@
 <nav aria-label="Sections">
   <ul>
     <li><a href="#weather">Weather</a></li>
+    <li><a href="#traffic">Traffic</a></li>
     <li><a href="#friday">Friday</a></li>
     <li><a href="#saturday">Saturday</a></li>
     <li><a href="#sunday">Sunday</a></li>
     <li><a href="#mlk">MLK Park</a></li>
-    <li><a href="#family">Family picks</a></li>
+    <li><a href="#family">Rainy-day picks</a></li>
     <li><a href="#prices">Prices</a></li>
   </ul>
 </nav>
@@ -216,51 +256,51 @@
 <main class="wrap">
   <header>
     <h1>ATL<br>Weekend</h1>
-    <p class="lede">October 9 to 11, 2026. Our plan for a rainy Pride weekend in Atlanta.</p>
+    <p class="lede">October 9 to 11, 2026. Our plan for a rainy Pride weekend in Atlanta, with food near every stop.</p>
 
     <div class="linemap" aria-label="Weekend at a glance">
       <a class="line" href="#friday" style="--c: var(--fri)">
         <span class="day">Fri</span>
-        <span class="track" aria-hidden="true"><i class="stop"></i><i class="stop"></i><i class="stop"></i><i class="stop"></i></span>
-        <span class="line-caption">Stone Mountain, Colony Square, late comedy</span>
+        <span class="track" aria-hidden="true"><i class="stop opt"></i><i class="stop"></i></span>
+        <span class="line-caption">Free afternoon, dinner at Colony Square</span>
       </a>
       <a class="line" href="#saturday" style="--c: var(--sat)">
         <span class="day">Sat</span>
-        <span class="track" aria-hidden="true"><i class="stop"></i><i class="stop"></i><i class="stop"></i><i class="stop"></i></span>
-        <span class="line-caption">MLK Park, Curb Market, World of Coca-Cola, Lenox</span>
+        <span class="track" aria-hidden="true"><i class="stop opt"></i><i class="stop"></i><i class="stop"></i><i class="stop opt"></i><i class="stop"></i></span>
+        <span class="line-caption">MLK Park, lunch, World of Coca-Cola, Stone Mountain or Lenox, CoolFit 5K</span>
       </a>
       <a class="line" href="#sunday" style="--c: var(--sun)">
         <span class="day">Sun</span>
-        <span class="track" aria-hidden="true"><i class="stop"></i><i class="stop"></i><i class="stop"></i></span>
-        <span class="line-caption">2819 Church, Ponce City Market, BeltLine</span>
+        <span class="track" aria-hidden="true"><i class="stop"></i><i class="stop"></i><i class="stop opt"></i><i class="stop opt"></i></span>
+        <span class="line-caption">2819 Church, brunch at Ponce City Market, BeltLine, Stone Mountain</span>
       </a>
     </div>
   </header>
 
   <section id="weather">
     <h2>Weather and what to wear</h2>
-    <p class="sub">Friday is the dry day. Saturday is all rain, so the plan stays indoors.</p>
+    <p class="sub">Friday is the dry day. Saturday is all rain, so the outdoor stops that day are weather permitting.</p>
     <div class="card weather">
       <div class="wx">
         <div class="d">Fri</div>
         <div class="t">63–75°</div>
         <div class="c">Cloudy, light rain possible</div>
         <div class="rain" aria-hidden="true"><span style="width:0%"></span></div>
-        <ul class="wear"><li>T-shirt and a light jacket</li><li>Sneakers with grip for the hike</li></ul>
+        <ul class="wear"><li>T-shirt and a light jacket</li><li>Comfortable shoes</li></ul>
       </div>
       <div class="wx">
         <div class="d">Sat</div>
         <div class="t">60–70°</div>
         <div class="c">Rain, 100%</div>
         <div class="rain" aria-hidden="true"><span style="width:100%"></span></div>
-        <ul class="wear"><li>Hooded rain jacket</li><li>Waterproof shoes</li><li>A sweater for cold museums</li></ul>
+        <ul class="wear"><li>Hooded rain jacket</li><li>Waterproof shoes</li><li>Bright or neon layer for the 5K</li></ul>
       </div>
       <div class="wx">
         <div class="d">Sun</div>
         <div class="t">64–71°</div>
         <div class="c">Showers, 60%</div>
         <div class="rain" aria-hidden="true"><span style="width:60%"></span></div>
-        <ul class="wear"><li>Church: casual to suit is all fine</li><li>Umbrella for the afternoon</li></ul>
+        <ul class="wear"><li>Church: casual to suit is all fine</li><li>Sneakers with grip if you hike</li></ul>
       </div>
       <div class="wx">
         <div class="d">Mon</div>
@@ -272,69 +312,81 @@
     </div>
   </section>
 
+  <section id="traffic">
+    <h2>Traffic heads-up</h2>
+    <p class="sub">Pride weekend, a concert, a Falcons game and an I-285 closure all land on the same weekend. Leave extra time.</p>
+    <ul class="card traffic">
+      <li><div class="when">Fri, 4 to 7 PM</div><div><b>Rush hour</b><span>The Downtown Connector (I-75/85) and GA-400 back up. Plan any cross-town drives before 4 or after 7.</span></div></li>
+      <li><div class="when">Fri 7 PM to Mon 5 AM</div><div><b>I-285 fully closed on the west side</b><span>Between South Atlanta Rd (Exit 16) and South Cobb Dr (Exit 15). Avoid it if you're coming in from the west or northwest. GDOT may cancel it if the weather is bad.</span></div></li>
+      <li><div class="when">Sat and Sun, all day</div><div><b>Pride Festival at Piedmont Park</b><span>Heavy traffic and street closures around the park in Midtown. Take MARTA or a rideshare in that area.</span></div></li>
+      <li><div class="when">Sat, from about 5 PM</div><div><b>Weezer at State Farm Arena (7 PM)</b><span>Downtown fills up near World of Coca-Cola. Leave Downtown by 5.</span></div></li>
+      <li><div class="when">Sat, all day</div><div><b>Rain</b><span>Wet roads mean slower traffic everywhere. Add 10 to 15 minutes to every drive.</span></div></li>
+      <li><div class="when">Sun, noon to about 5 PM</div><div><b>Pride Parade closes Peachtree St</b><span>Peachtree is closed from Civic Center MARTA up to 10th St, and 10th St stays closed about an hour after the parade. From church to Ponce City Market, take I-75/85 to North Ave instead.</span></div></li>
+      <li><div class="when">Sun, from late afternoon</div><div><b>Falcons vs. Ravens (8:20 PM)</b><span>Downtown and the Connector get busy before kickoff. Coming back from Stone Mountain, head home before 6 PM or expect delays on I-20 near Downtown.</span></div></li>
+    </ul>
+  </section>
+
   <section id="friday" style="--c: var(--fri)">
-    <div class="day-head"><h3>Friday, Oct 9</h3><span class="tag">Outdoor day</span></div>
+    <div class="day-head"><h3>Friday, Oct 9</h3><span class="tag">Easy day</span></div>
     <ol class="route">
-      <li>
-        <span class="time">1:30 to 5:00 PM</span>
-        <span class="stopname">Hike Stone Mountain</span>
-        <p class="note">The walk-up trail is about a mile each way on steep granite. Do it today, since the rock gets slick in the rain.</p>
-        <p class="meta">Free hike, $20 parking per car. 25 to 30 min drive. <a href="https://www.google.com/maps/dir/?api=1&destination=Stone+Mountain+Park+Walk-Up+Trail%2C+Stone+Mountain%2C+GA">Directions</a></p>
+      <li class="optional">
+        <span class="time">Afternoon</span>
+        <span class="stopname">Free afternoon</span>
+        <p class="note">Pick anything from the <a href="#family">rainy-day picks</a>. Today's the driest day, so it's also a good time to walk around Midtown.</p>
       </li>
       <li>
         <span class="time">6:30 PM</span>
         <span class="stopname">Dinner at Colony Square</span>
-        <p class="meta">Free to walk around, pay for food. In Midtown. <a href="https://www.google.com/maps/dir/?api=1&destination=Colony+Square%2C+Atlanta%2C+GA">Directions</a></p>
-      </li>
-      <li class="optional">
-        <span class="time">Evening, optional</span>
-        <span class="stopname">CoolFit 5K Neon Night Run/Walk</span>
-        <p class="meta">Free. Check the event listing for the start location.</p>
-      </li>
-      <li>
-        <span class="time">11:55 PM</span>
-        <span class="stopname">The 420 Friday Comedy Show</span>
-        <p class="note">At the Atlanta Comedy Theater in Norcross.</p>
-        <p class="meta">Tickets from about $37. 25 to 30 min drive. <a href="https://www.google.com/maps/dir/?api=1&destination=Atlanta+Comedy+Theater%2C+Norcross%2C+GA">Directions</a></p>
+        <p class="meta">Free to walk around, pay for food. In Midtown, 0 to 5 min away. <a href="https://www.google.com/maps/dir/?api=1&destination=Colony+Square%2C+Atlanta%2C+GA">Directions</a></p>
+        <details class="food" data-stop="colony"><summary>Food nearby</summary></details>
       </li>
     </ol>
   </section>
 
   <section id="saturday" style="--c: var(--sat)">
-    <div class="day-head"><h3>Saturday, Oct 10</h3><span class="tag">Rain day, stay inside</span></div>
+    <div class="day-head"><h3>Saturday, Oct 10</h3><span class="tag">Rain day, so the outdoor stops depend on the weather</span></div>
     <ol class="route">
-      <li>
-        <span class="time">9:00 AM to 12:30 PM</span>
+      <li class="optional">
+        <span class="time">9:00 AM to 12:00 PM <span class="flag">Weather permitting</span></span>
         <span class="stopname">Martin Luther King Jr. National Historical Park</span>
-        <p class="note">Get there at 9 to grab Birth Home tour spots. <a href="#mlk">What to see</a></p>
+        <p class="note">You walk outside between the sites, so bring an umbrella. Get there at 9 to grab Birth Home tour spots. <a href="#mlk">What to see</a></p>
         <p class="meta">Free, with free parking. About 10 min drive. <a href="https://www.google.com/maps/dir/?api=1&destination=423+John+Wesley+Dobbs+Ave+NE%2C+Atlanta%2C+GA+30312">Directions</a></p>
+        <details class="food" data-stop="mlk"><summary>Food nearby</summary></details>
       </li>
       <li>
-        <span class="time">12:30 PM</span>
-        <span class="stopname">Lunch at Sweet Auburn Curb Market</span>
-        <p class="meta">A covered market about 5 min from the MLK park. <a href="https://www.google.com/maps/dir/?api=1&destination=Sweet+Auburn+Curb+Market%2C+Atlanta%2C+GA">Directions</a></p>
+        <span class="time">12:00 PM</span>
+        <span class="stopname">Lunch at the Municipal Market</span>
+        <p class="note">The covered Sweet Auburn Curb Market, about 0.4 mi from the MLK park. Open Saturday 8 AM to 6 PM.</p>
+        <p class="meta">Pay as you go. <a href="https://www.google.com/maps/dir/?api=1&destination=209+Edgewood+Ave+SE%2C+Atlanta%2C+GA+30303">Directions</a></p>
       </li>
       <li>
-        <span class="time">2:00 to 4:30 PM</span>
+        <span class="time">1:30 to 4:00 PM</span>
         <span class="stopname">World of Coca-Cola</span>
         <p class="note">Veterans and service members get one free general admission ticket.</p>
         <p class="meta">Adults $24.95 to $27.95, seniors $22.95 to $25.95, kids 3 to 12 $20.95 to $23.95. About 10 min drive. <a href="https://www.google.com/maps/dir/?api=1&destination=World+of+Coca-Cola%2C+Atlanta%2C+GA">Directions</a></p>
-      </li>
-      <li>
-        <span class="time">5:30 PM</span>
-        <span class="stopname">Shopping and dinner at Lenox Square</span>
-        <p class="meta">Free to visit. 15 to 20 min drive, or MARTA to Lenox station. <a href="https://www.google.com/maps/dir/?api=1&destination=Lenox+Square%2C+Atlanta%2C+GA">Directions</a></p>
+        <details class="food" data-stop="coke"><summary>Food nearby</summary></details>
       </li>
       <li class="optional">
-        <span class="time">If the rain stops</span>
-        <span class="stopname">Atlanta Pride Festival</span>
-        <p class="meta">Free, 10 AM to 10 PM in Piedmont Park. Take MARTA; streets nearby are closed. <a href="https://www.google.com/maps/dir/?api=1&destination=Piedmont+Park%2C+Atlanta%2C+GA">Directions</a></p>
+        <span class="time">4:30 PM <span class="flag">Depends on the rain</span></span>
+        <span class="stopname">Stone Mountain or Lenox Square</span>
+        <div class="card or">
+          <p><b>If it's dry: hike Stone Mountain</b>The walk-up trail is about a mile each way on granite. $20 parking per car, 25 to 30 min drive. Leave by 6:45 PM to make the 5K. If it's wet, the hike moves to Sunday. <a href="https://www.google.com/maps/dir/?api=1&destination=Stone+Mountain+Park+Walk-Up+Trail%2C+Stone+Mountain%2C+GA">Directions</a></p>
+          <p><b>If it's raining: Lenox Square</b>Indoor shopping and an early dinner in Buckhead. Free to visit, 15 to 20 min drive. <a href="https://www.google.com/maps/dir/?api=1&destination=Lenox+Square%2C+Atlanta%2C+GA">Directions</a></p>
+        </div>
+        <details class="food" data-stop="lenox"><summary>Food near Lenox</summary></details>
+      </li>
+      <li>
+        <span class="time">7:30 to 10:30 PM</span>
+        <span class="stopname">CoolFit 5K Neon Night Run/Walk</span>
+        <p class="note">On the BeltLine Westside Trail at the COOL WRLD Content Gallery, 1229 Allene Ave SW. There's pre-run yoga and stretching, a DJ, food vendors and smoothies. It's outdoors, so check @CoolWrldCollective for rain updates.</p>
+        <p class="meta">Free with RSVP. Optional medal $25, perk pack $20. 15 to 20 min drive. <a href="https://www.eventbrite.com/e/coolfit-5k-neon-night-run-walk-tickets-1999609068552">RSVP on Eventbrite</a> <a href="https://www.google.com/maps/dir/?api=1&destination=1229+Allene+Ave+SW%2C+Atlanta%2C+GA+30310">Directions</a></p>
+        <details class="food" data-stop="5k"><summary>Food nearby</summary></details>
       </li>
     </ol>
   </section>
 
   <section id="sunday" style="--c: var(--sun)">
-    <div class="day-head"><h3>Sunday, Oct 11</h3><span class="tag">Church, then an easy afternoon</span></div>
+    <div class="day-head"><h3>Sunday, Oct 11</h3><span class="tag">Church, brunch, then outside if it's dry</span></div>
     <ol class="route">
       <li>
         <span class="time">Morning</span>
@@ -343,31 +395,41 @@
         <div class="card picker">
           <p>Pick a service:</p>
           <div class="seg" role="group" aria-label="Service time">
-            <button type="button" data-leave="7:00 AM" data-note="You'll be back before the noon Pride Parade closes Peachtree." aria-pressed="true">8:00 AM</button>
-            <button type="button" data-leave="9:30 AM" data-note="The Pride Parade closes Peachtree and 10th St around noon, so plan a route around it coming back." aria-pressed="false">10:30 AM</button>
-            <button type="button" data-leave="12:00 PM" data-note="The parade is underway when you leave, so avoid Peachtree on the way out." aria-pressed="false">1:00 PM</button>
+            <button type="button" data-leave="7:00 AM" data-note="Out around 9:30, with time for brunch before the noon Pride Parade." aria-pressed="true">8:00 AM</button>
+            <button type="button" data-leave="9:30 AM" data-note="You'll get out as the parade starts. Take I-75/85 to North Ave to reach Ponce City Market, not Peachtree." aria-pressed="false">10:30 AM</button>
+            <button type="button" data-leave="12:00 PM" data-note="The parade is underway when you leave, so avoid Peachtree on the way out. Brunch would be after 2:30." aria-pressed="false">1:00 PM</button>
           </div>
           <p class="leave" id="leave">Leave Midtown by 7:00 AM</p>
-          <p class="meta" id="leave-note">You'll be back before the noon Pride Parade closes Peachtree.</p>
+          <p class="meta" id="leave-note">Out around 9:30, with time for brunch before the noon Pride Parade.</p>
         </div>
         <p class="meta" style="margin-top:8px">Free. 20 to 25 min drive. <a href="https://www.google.com/maps/dir/?api=1&destination=3350+Greenbriar+Pkwy+SW%2C+Atlanta%2C+GA+30331">Directions</a></p>
+        <details class="food" data-stop="church"><summary>Food nearby</summary></details>
       </li>
       <li>
-        <span class="time">Lunch</span>
-        <span class="stopname">Ponce City Market food hall</span>
-        <p class="meta">Free to enter, pay for food. 5 to 10 min drive. <a href="https://www.google.com/maps/dir/?api=1&destination=Ponce+City+Market%2C+Atlanta%2C+GA">Directions</a></p>
+        <span class="time">After church</span>
+        <span class="stopname">Brunch at Ponce City Market</span>
+        <p class="note">The market opens at 11 on Sunday, but Pancake Social and El Super Pan open earlier.</p>
+        <p class="meta">Free to enter, pay for food. 20 to 25 min from church; skip Peachtree because of the parade. <a href="https://www.google.com/maps/dir/?api=1&destination=Ponce+City+Market%2C+Atlanta%2C+GA">Directions</a></p>
+        <details class="food" data-stop="ponce"><summary>Food at Ponce City Market</summary></details>
       </li>
       <li class="optional">
-        <span class="time">If it's dry</span>
+        <span class="time">After brunch <span class="flag">If it's dry</span></span>
         <span class="stopname">Walk the BeltLine Eastside Trail</span>
         <p class="meta">Free. The trail runs right behind Ponce City Market.</p>
+      </li>
+      <li class="optional">
+        <span class="time">Afternoon <span class="flag">If you didn't go Saturday</span></span>
+        <span class="stopname">Hike Stone Mountain</span>
+        <p class="note">The walk-up trail is about a mile each way on steep granite. Skip it if the rock is wet. Sunset is around 7:10 PM.</p>
+        <p class="meta">Free hike, $20 parking per car. 25 to 30 min from Ponce City Market. <a href="https://www.google.com/maps/dir/?api=1&destination=Stone+Mountain+Park+Walk-Up+Trail%2C+Stone+Mountain%2C+GA">Directions</a></p>
+        <details class="food" data-stop="stonemtn"><summary>Food nearby</summary></details>
       </li>
     </ol>
   </section>
 
   <section id="mlk">
     <h2>Martin Luther King Jr. National Historical Park</h2>
-    <p class="sub">Plan 2 to 3 hours. Everything here is free.</p>
+    <p class="sub">Saturday morning, weather permitting. Plan 2 to 3 hours. Everything here is free.</p>
     <dl class="card facts">
       <div><dt>Hours</dt><dd>Daily, 9 AM to 5 PM</dd></div>
       <div><dt>Parking</dt><dd>Free lot at 423 John Wesley Dobbs Ave NE</dd></div>
@@ -399,18 +461,18 @@
 
   <section id="prices">
     <h2>Prices and drive times</h2>
-    <p class="sub">Drive times are from Midtown Atlanta with normal traffic. Pride closures can add time near Piedmont Park.</p>
+    <p class="sub">Drive times are from Midtown Atlanta with normal traffic. See the <a href="#traffic">traffic heads-up</a> for this weekend's delays.</p>
     <div class="card table-wrap">
-      <table>
+      <table class="ptable">
         <thead><tr><th>Stop</th><th>Price</th><th>Drive</th></tr></thead>
         <tbody>
-          <tr><td>Stone Mountain hike</td><td>Free, $20 parking per car</td><td>25–30 min</td></tr>
           <tr><td>Colony Square</td><td>Free</td><td>0–5 min</td></tr>
-          <tr><td>CoolFit 5K Neon Night</td><td>Free</td><td>Check listing</td></tr>
-          <tr><td>420 Friday Comedy Show</td><td>From about $37</td><td>25–30 min</td></tr>
           <tr><td>MLK National Historical Park</td><td>Free</td><td>About 10 min</td></tr>
+          <tr><td>Municipal Market</td><td>Pay as you go</td><td>About 10 min</td></tr>
           <tr><td>World of Coca-Cola</td><td>$20.95 to $27.95 by age</td><td>About 10 min</td></tr>
+          <tr><td>Stone Mountain hike</td><td>Free, $20 parking per car</td><td>25–30 min</td></tr>
           <tr><td>Lenox Square</td><td>Free</td><td>15–20 min</td></tr>
+          <tr><td>CoolFit 5K Neon Night</td><td>Free with RSVP ($25 medal, $20 perk pack optional)</td><td>15–20 min</td></tr>
           <tr><td>2819 Church</td><td>Free</td><td>20–25 min</td></tr>
           <tr><td>Ponce City Market</td><td>Free to enter</td><td>5–10 min</td></tr>
           <tr><td>Atlanta BeltLine</td><td>Free</td><td>5–10 min</td></tr>
@@ -420,14 +482,60 @@
   </section>
 
   <footer>
-    <p>It's Atlanta Pride weekend, so take MARTA or a rideshare in Midtown on Saturday and Sunday.</p>
-    <p>Forecast as of Thursday, October 8. Check hours and the weather before you head out.</p>
+    <p>Food prices are per person: $ is under $15, $$ is $15 to $30, $$$ is $30 to $60. Distances are straight-line from each stop. Restaurant info is from Google Maps, so check hours before you go.</p>
+    <p>Forecast as of Thursday, October 8.</p>
     <button class="print" type="button" onclick="window.print()">Print this plan</button>
   </footer>
 </main>
 
 <script>
+  var FOOD = {"colony":[{"name":"Politan Row","cuisine":"Food hall (tacos, sushi, Thai, Jamaican)","mi":0.0,"price":2,"note":"Open till midnight Fri","addr":"1197 Peachtree St NE, Atlanta, GA 30361"},{"name":"Boqueria","cuisine":"Spanish tapas","mi":0.1,"price":2,"note":"","addr":"1221 Peachtree St NE, Atlanta, GA 30361"},{"name":"Serena Pastificio","cuisine":"Italian","mi":0.0,"price":2,"note":"","addr":"1197 Peachtree St NE, Atlanta, GA 30361"},{"name":"Saints + Council","cuisine":"Southern American","mi":0.1,"price":2,"note":"Reservations recommended","addr":"1221 Peachtree St NE, Atlanta, GA 30361"},{"name":"Rumi's Kitchen","cuisine":"Persian","mi":0.1,"price":2,"note":"Reservations recommended","addr":"1175 Peachtree St NE, Atlanta, GA 30361"}],"mlk":[{"name":"Municipal Market (Curb Market)","cuisine":"Market stalls (BBQ, Southern, sweets)","mi":0.4,"price":null,"note":"Sat 8 AM to 6 PM, closed Sun","addr":"209 Edgewood Ave SE, Atlanta, GA 30303"},{"name":"Harold's Chicken","cuisine":"Fried chicken, soul food","mi":0.2,"price":1,"note":"","addr":"349 Edgewood Ave SE, Atlanta, GA 30312"},{"name":"Miss Conduck","cuisine":"Caribbean","mi":0.2,"price":null,"note":"Sat 9 AM to 6 PM, closed Sun","addr":"357 Edgewood Ave SE, Atlanta, GA 30312"},{"name":"Auburn Angel","cuisine":"Southern (upscale)","mi":0.3,"price":3,"note":"Sat and Sun 11 AM to 3 PM only","addr":"302 Auburn Ave NE, Atlanta, GA 30303"},{"name":"Soul: Food & Culture","cuisine":"Soul food","mi":0.5,"price":1,"note":"Inside Krog Street Market","addr":"99 Krog St NE T, Atlanta, GA 30307"}],"coke":[{"name":"The Food Shoppe","cuisine":"Creole","mi":0.3,"price":1,"note":"Sat 11 AM to 3 PM, closed Sun","addr":"123 Luckie St NW, Atlanta, GA 30303"},{"name":"Breakfast On Luckie","cuisine":"Southern breakfast","mi":0.2,"price":1,"note":"7 AM to 3 PM","addr":"320 Luckie St NW, Atlanta, GA 30313"},{"name":"Der Biergarten","cuisine":"German","mi":0.2,"price":2,"note":"Sat from noon","addr":"300 Marietta St NW, Atlanta, GA 30313"},{"name":"Margaritaville","cuisine":"American, Caribbean-style","mi":0.3,"price":2,"note":"","addr":"155 Centennial Olympic Park Dr NW, Atlanta, GA 30303"},{"name":"Ray's In the City","cuisine":"Seafood and steak","mi":0.3,"price":3,"note":"","addr":"240 Peachtree St, Atlanta, GA 30303"}],"lenox":[{"name":"Pastella","cuisine":"Italian (food court)","mi":0.1,"price":1,"note":"Inside the mall","addr":"3393 Peachtree Rd NE, Atlanta, GA 30326"},{"name":"True Food Kitchen","cuisine":"Healthy, Mediterranean","mi":0.1,"price":2,"note":"Lots of vegan and dairy-free","addr":"3393 Peachtree Rd NE, Atlanta, GA 30326"},{"name":"North Italia","cuisine":"Italian, pizza","mi":0.1,"price":2,"note":"","addr":"3393 Peachtree Rd NE, Atlanta, GA 30326"},{"name":"5Church Buckhead","cuisine":"American","mi":0.2,"price":3,"note":"","addr":"3379 Peachtree Rd NE, Atlanta, GA 30326"}],"stonemtn":[{"name":"Live Oak","cuisine":"American pub","mi":1.4,"price":1,"note":"Stone Mountain Village","addr":"947 Main St, Stone Mountain, GA 30083"},{"name":"Stoned Pizza Kitchen","cuisine":"Pizza","mi":1.4,"price":1,"note":"Stone Mountain Village","addr":"965 Main St, Stone Mountain, GA 30083"},{"name":"Cherokee Rose","cuisine":"BBQ, seafood, Southern","mi":1.4,"price":2,"note":"Closed 3 to 4:30 PM","addr":"975 Main St, Stone Mountain, GA 30083"},{"name":"Sweet Potato Cafe","cuisine":"Southern cafe","mi":1.4,"price":1,"note":"Sun 11 AM to 3 PM","addr":"5377 Manor Dr, Stone Mountain, GA 30083"},{"name":"The Mayan Grill","cuisine":"Latin American","mi":1.7,"price":1,"note":"","addr":"6552 James B Rivers Memorial Dr, Stone Mountain, GA 30083"}],"5k":[{"name":"Boxcar at Hop City","cuisine":"American, burgers","mi":0.7,"price":2,"note":"Open till 10 PM","addr":"1000 White St SW, Atlanta, GA 30310"},{"name":"Gekko Kitchen","cuisine":"Japanese","mi":0.8,"price":1,"note":"Open till 9 PM","addr":"1020 White St SW, Atlanta, GA 30310"},{"name":"El Tesoro","cuisine":"Mexican","mi":0.9,"price":1,"note":"Open till 10 PM","addr":"1036 White St SW, Atlanta, GA 30310"},{"name":"Oak Street Eats","cuisine":"Food hall","mi":1.4,"price":2,"note":"Open late","addr":"777 Oak St SW, Atlanta, GA 30310"}],"church":[{"name":"Mexi Melt","cuisine":"Mexican (takeout)","mi":0.7,"price":1,"note":"Sun from noon","addr":"2740 Greenbriar Pkwy SW ste. A-5, Atlanta, GA 30331"},{"name":"Piccadilly","cuisine":"Southern cafeteria","mi":0.4,"price":1,"note":"Sun 11 AM to 7 PM","addr":"2841 Greenbriar Pkwy SW, Atlanta, GA 30331"},{"name":"Gocha's Breakfast Bar","cuisine":"Breakfast and brunch","mi":3.0,"price":2,"note":"Sun 9 AM to 3 PM","addr":"3695 Cascade Rd Ste 440, Atlanta, GA 30331"},{"name":"Big Daddy's Kitchen","cuisine":"American, Southern","mi":0.9,"price":2,"note":"Sun from 10:30 AM","addr":"3085 Campbellton Rd SW, Atlanta, GA 30311"},{"name":"Whisk Breakfast & Brunch","cuisine":"Brunch","mi":1.9,"price":3,"note":"Sun 8 AM to 5 PM","addr":"3523 Camp Creek Pkwy, East Point, GA 30344"}],"ponce":[{"name":"Pancake Social","cuisine":"Brunch, pancakes","mi":0.0,"price":1,"note":"Sun 7 AM to 3 PM","addr":"675 Ponce De Leon Ave NE, Atlanta, GA 30308"},{"name":"El Super Pan","cuisine":"Latin, Cuban sandwiches","mi":0.1,"price":null,"note":"Sun 9 AM to 8 PM","addr":"Ponce City Market, 675 Ponce De Leon Ave NE, Atlanta, GA 30308"},{"name":"Bellina Alimentari","cuisine":"Italian","mi":0.1,"price":2,"note":"Sun from 11 AM","addr":"Ponce City Market, 675 Ponce De Leon Ave NE Unit 131, Atlanta, GA 30308"},{"name":"Okiboru","cuisine":"Japanese ramen","mi":0.0,"price":1,"note":"Sun from noon","addr":"675 Ponce De Leon Ave NE N159, Atlanta, GA 30308"},{"name":"Terminal 26","cuisine":"Thai","mi":0.1,"price":2,"note":"Sun from 11:30 AM","addr":"675 Ponce De Leon Ave NE Ste n 133, Atlanta, GA 30308"}]};
+
   (function () {
+    var PRICE = { 1: '$', 2: '$$', 3: '$$$' };
+    function mapLink(r) {
+      return 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(r.name + ', ' + (r.addr || 'Atlanta, GA'));
+    }
+    function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
+    function dist(m) { return m < 0.1 ? 'Same building' : m.toFixed(1) + ' mi'; }
+
+    function render(box, rows, mode) {
+      var sorted = rows.slice();
+      if (mode === 'distance') sorted.sort(function (a, b) { return a.mi - b.mi; });
+      else if (mode === 'price') sorted.sort(function (a, b) { return (a.price || 9) - (b.price || 9) || a.mi - b.mi; });
+      else sorted.sort(function (a, b) { return a.cuisine.localeCompare(b.cuisine) || a.mi - b.mi; });
+      var html = '';
+      sorted.forEach(function (r) {
+        html += '<tr><td class="nm"><a href="' + mapLink(r) + '">' + esc(r.name) + '</a>' +
+          '<small class="c2">' + esc(r.cuisine) + '</small>' +
+          (r.note ? '<small>' + esc(r.note) + '</small>' : '') + '</td>' +
+          '<td class="cu">' + esc(r.cuisine) + '</td>' +
+          '<td class="num">' + dist(r.mi) + '</td>' +
+          '<td class="num">' + (r.price ? PRICE[r.price] : 'Varies') + '</td></tr>';
+      });
+      box.querySelector('tbody').innerHTML = html;
+    }
+
+    document.querySelectorAll('details.food').forEach(function (d) {
+      var rows = FOOD[d.dataset.stop] || [];
+      d.querySelector('summary').textContent = d.querySelector('summary').textContent + ' (' + rows.length + ')';
+      var box = document.createElement('div');
+      box.className = 'card foodbox';
+      box.innerHTML = '<div class="sortbar" role="group" aria-label="Sort food">Sort by' +
+        '<button type="button" data-mode="cuisine" aria-pressed="true">Cuisine</button>' +
+        '<button type="button" data-mode="distance" aria-pressed="false">Distance</button>' +
+        '<button type="button" data-mode="price" aria-pressed="false">Price</button></div>' +
+        '<table class="ftable"><tbody></tbody></table>';
+      d.appendChild(box);
+      render(box, rows, 'cuisine');
+      box.querySelectorAll('.sortbar button').forEach(function (b) {
+        b.addEventListener('click', function () {
+          box.querySelectorAll('.sortbar button').forEach(function (x) { x.setAttribute('aria-pressed', x === b ? 'true' : 'false'); });
+          render(box, rows, b.dataset.mode);
+        });
+      });
+    });
+
     var buttons = document.querySelectorAll('.seg button');
     var leave = document.getElementById('leave');
     var note = document.getElementById('leave-note');
