@@ -1,0 +1,444 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ATL Weekend, Oct 9 to 11</title>
+<meta name="description" content="Our Atlanta weekend plan for October 9 to 11, 2026: weather, what to wear, the day-by-day plan, prices and drive times.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Overpass:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --paper: #F2F4F3;
+    --surface: #FFFFFF;
+    --ink: #1C2421;
+    --muted: #5B6763;
+    --rule: #D3DAD7;
+    --fri: #C98A00;
+    --sat: #1F6FB2;
+    --sun: #C8102E;
+    --focus: #1F6FB2;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --paper: #121816;
+      --surface: #1A2220;
+      --ink: #E7EDEA;
+      --muted: #9BA8A3;
+      --rule: #2E3936;
+      --fri: #E9AC2A;
+      --sat: #5AA2E0;
+      --sun: #F0546C;
+      --focus: #5AA2E0;
+    }
+  }
+
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: "Overpass", system-ui, sans-serif;
+    font-size: 17px;
+    line-height: 1.5;
+    font-variant-numeric: tabular-nums;
+  }
+  a { color: inherit; text-underline-offset: 3px; text-decoration-thickness: 1px; }
+  a:hover { text-decoration-thickness: 2px; }
+  :focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; border-radius: 3px; }
+
+  .wrap { max-width: 760px; margin: 0 auto; padding: 0 20px; }
+
+  /* Nav */
+  nav {
+    position: sticky; top: 0; z-index: 10;
+    background: color-mix(in srgb, var(--paper) 92%, transparent);
+    backdrop-filter: blur(6px);
+    border-bottom: 1px solid var(--rule);
+  }
+  nav ul {
+    list-style: none; margin: 0 auto; padding: 10px 20px; max-width: 760px;
+    display: flex; gap: 18px; overflow-x: auto; scrollbar-width: none;
+  }
+  nav ul::-webkit-scrollbar { display: none; }
+  nav a { text-decoration: none; font-weight: 600; font-size: 15px; white-space: nowrap; color: var(--muted); }
+  nav a:hover { color: var(--ink); }
+
+  /* Hero */
+  header { padding: 56px 0 36px; }
+  h1 {
+    font-size: clamp(56px, 14vw, 112px);
+    line-height: 0.9;
+    letter-spacing: -0.03em;
+    font-weight: 800;
+    margin: 0 0 14px;
+  }
+  .lede { font-size: 20px; color: var(--muted); margin: 0 0 32px; max-width: 34ch; }
+
+  /* Line map: the one bold element */
+  .linemap { display: grid; gap: 14px; }
+  .line {
+    display: grid; grid-template-columns: 54px 1fr; align-items: center; gap: 12px;
+    text-decoration: none;
+  }
+  .line .day { font-weight: 800; font-size: 18px; }
+  .track { position: relative; height: 22px; display: flex; align-items: center; justify-content: space-between; }
+  .track::before {
+    content: ""; position: absolute; left: 0; right: 0; top: 50%; height: 8px; transform: translateY(-50%);
+    border-radius: 4px; background: var(--c);
+  }
+  .stop {
+    position: relative; width: 22px; height: 22px; border-radius: 50%;
+    background: var(--surface); border: 5px solid var(--c);
+  }
+  .line:hover .track::before { filter: brightness(1.08); }
+  .line-caption { grid-column: 2; font-size: 14px; color: var(--muted); margin-top: -6px; }
+
+  /* Sections */
+  section { padding: 44px 0 8px; scroll-margin-top: 56px; }
+  h2 {
+    font-size: 30px; line-height: 1.1; font-weight: 800; letter-spacing: -0.01em;
+    margin: 0 0 6px;
+  }
+  .sub { color: var(--muted); margin: 0 0 22px; }
+  h3 { font-size: 22px; font-weight: 800; margin: 0; }
+
+  .card { background: var(--surface); border: 1px solid var(--rule); border-radius: 10px; }
+
+  /* Weather */
+  .weather { display: grid; grid-template-columns: repeat(4, 1fr); }
+  .wx { padding: 16px 16px 18px; border-left: 1px solid var(--rule); }
+  .wx:first-child { border-left: 0; }
+  .wx .d { font-weight: 800; font-size: 18px; }
+  .wx .t { font-size: 26px; font-weight: 800; letter-spacing: -0.02em; margin: 2px 0; }
+  .wx .c { color: var(--muted); font-size: 15px; }
+  .rain { height: 6px; background: var(--rule); border-radius: 3px; margin: 10px 0 12px; overflow: hidden; }
+  .rain span { display: block; height: 100%; background: var(--sat); }
+  .wx .wear { font-size: 15px; margin: 0; padding: 0; list-style: none; }
+  .wx .wear li + li { margin-top: 4px; }
+  @media (max-width: 640px) {
+    .weather { grid-template-columns: 1fr 1fr; }
+    .wx:nth-child(3) { border-left: 0; }
+    .wx:nth-child(n+3) { border-top: 1px solid var(--rule); }
+  }
+
+  /* Day plans */
+  .day-head { display: flex; align-items: baseline; gap: 12px; margin: 30px 0 4px; }
+  .day-head .tag { font-weight: 600; color: var(--muted); }
+  .route { list-style: none; margin: 12px 0 0; padding: 0; position: relative; }
+  .route::before {
+    content: ""; position: absolute; left: 10px; top: 14px; bottom: 14px; width: 6px; border-radius: 3px; background: var(--c);
+  }
+  .route li { position: relative; padding: 0 0 22px 44px; }
+  .route li::before {
+    content: ""; position: absolute; left: 2px; top: 4px; width: 22px; height: 22px; border-radius: 50%;
+    background: var(--surface); border: 5px solid var(--c); box-sizing: border-box;
+  }
+  .route li.optional::before { border-style: dashed; border-width: 3px; }
+  .time { font-weight: 800; font-size: 15px; color: var(--muted); display: block; }
+  .stopname { font-weight: 800; font-size: 19px; line-height: 1.25; display: block; margin: 1px 0 3px; }
+  .note { margin: 0 0 4px; }
+  .meta { font-size: 15px; color: var(--muted); margin: 0; }
+  .meta a { color: var(--ink); font-weight: 600; }
+
+  /* Service picker */
+  .picker { padding: 16px; margin: 6px 0 4px; }
+  .seg { display: inline-flex; border: 1px solid var(--rule); border-radius: 8px; overflow: hidden; margin: 10px 0 12px; }
+  .seg button {
+    font: inherit; font-weight: 600; font-size: 16px; padding: 8px 16px; border: 0;
+    background: transparent; color: var(--ink); cursor: pointer;
+  }
+  .seg button + button { border-left: 1px solid var(--rule); }
+  .seg button[aria-pressed="true"] { background: var(--sun); color: #fff; }
+  .picker p { margin: 0; }
+  .picker .leave { font-weight: 800; font-size: 20px; }
+
+  /* MLK */
+  dl.facts { margin: 0; }
+  .facts div { display: grid; grid-template-columns: 150px 1fr; gap: 16px; padding: 12px 16px; border-top: 1px solid var(--rule); }
+  .facts div:first-child { border-top: 0; }
+  .facts dt { font-weight: 800; }
+  .facts dd { margin: 0; }
+  @media (max-width: 560px) { .facts div { grid-template-columns: 1fr; gap: 2px; } }
+
+  /* Family */
+  .family { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: 1fr 1fr; }
+  .family li { padding: 14px 16px; border-top: 1px solid var(--rule); }
+  .family li:nth-child(-n+2) { border-top: 0; }
+  .family li:nth-child(even) { border-left: 1px solid var(--rule); }
+  .family b { display: block; font-size: 17px; }
+  .family span { color: var(--muted); font-size: 15px; }
+  @media (max-width: 560px) {
+    .family { grid-template-columns: 1fr; }
+    .family li:nth-child(even) { border-left: 0; }
+    .family li:nth-child(2) { border-top: 1px solid var(--rule); }
+  }
+
+  /* Prices */
+  .table-wrap { overflow-x: auto; }
+  table { width: 100%; border-collapse: collapse; font-size: 16px; min-width: 480px; }
+  th, td { text-align: left; padding: 10px 16px; border-top: 1px solid var(--rule); vertical-align: top; }
+  thead th { border-top: 0; font-size: 14px; color: var(--muted); font-weight: 600; }
+  td:first-child { font-weight: 600; }
+  td:last-child, th:last-child { white-space: nowrap; }
+
+  footer { padding: 40px 0 56px; color: var(--muted); font-size: 15px; }
+  footer p { margin: 0 0 6px; max-width: 60ch; }
+  .print { font: inherit; font-weight: 600; font-size: 15px; background: none; border: 1px solid var(--rule); color: var(--ink); border-radius: 8px; padding: 8px 14px; cursor: pointer; margin-top: 12px; }
+
+  @media print {
+    nav, .print { display: none; }
+    body { background: #fff; color: #000; font-size: 12pt; }
+    header { padding-top: 0; }
+    section { break-inside: avoid-page; padding-top: 18px; }
+    .card { border-color: #bbb; }
+  }
+</style>
+</head>
+<body>
+
+<nav aria-label="Sections">
+  <ul>
+    <li><a href="#weather">Weather</a></li>
+    <li><a href="#friday">Friday</a></li>
+    <li><a href="#saturday">Saturday</a></li>
+    <li><a href="#sunday">Sunday</a></li>
+    <li><a href="#mlk">MLK Park</a></li>
+    <li><a href="#family">Family picks</a></li>
+    <li><a href="#prices">Prices</a></li>
+  </ul>
+</nav>
+
+<main class="wrap">
+  <header>
+    <h1>ATL<br>Weekend</h1>
+    <p class="lede">October 9 to 11, 2026. Our plan for a rainy Pride weekend in Atlanta.</p>
+
+    <div class="linemap" aria-label="Weekend at a glance">
+      <a class="line" href="#friday" style="--c: var(--fri)">
+        <span class="day">Fri</span>
+        <span class="track" aria-hidden="true"><i class="stop"></i><i class="stop"></i><i class="stop"></i><i class="stop"></i></span>
+        <span class="line-caption">Stone Mountain, Colony Square, late comedy</span>
+      </a>
+      <a class="line" href="#saturday" style="--c: var(--sat)">
+        <span class="day">Sat</span>
+        <span class="track" aria-hidden="true"><i class="stop"></i><i class="stop"></i><i class="stop"></i><i class="stop"></i></span>
+        <span class="line-caption">MLK Park, Curb Market, World of Coca-Cola, Lenox</span>
+      </a>
+      <a class="line" href="#sunday" style="--c: var(--sun)">
+        <span class="day">Sun</span>
+        <span class="track" aria-hidden="true"><i class="stop"></i><i class="stop"></i><i class="stop"></i></span>
+        <span class="line-caption">2819 Church, Ponce City Market, BeltLine</span>
+      </a>
+    </div>
+  </header>
+
+  <section id="weather">
+    <h2>Weather and what to wear</h2>
+    <p class="sub">Friday is the dry day. Saturday is all rain, so the plan stays indoors.</p>
+    <div class="card weather">
+      <div class="wx">
+        <div class="d">Fri</div>
+        <div class="t">63–75°</div>
+        <div class="c">Cloudy, light rain possible</div>
+        <div class="rain" aria-hidden="true"><span style="width:0%"></span></div>
+        <ul class="wear"><li>T-shirt and a light jacket</li><li>Sneakers with grip for the hike</li></ul>
+      </div>
+      <div class="wx">
+        <div class="d">Sat</div>
+        <div class="t">60–70°</div>
+        <div class="c">Rain, 100%</div>
+        <div class="rain" aria-hidden="true"><span style="width:100%"></span></div>
+        <ul class="wear"><li>Hooded rain jacket</li><li>Waterproof shoes</li><li>A sweater for cold museums</li></ul>
+      </div>
+      <div class="wx">
+        <div class="d">Sun</div>
+        <div class="t">64–71°</div>
+        <div class="c">Showers, 60%</div>
+        <div class="rain" aria-hidden="true"><span style="width:60%"></span></div>
+        <ul class="wear"><li>Church: casual to suit is all fine</li><li>Umbrella for the afternoon</li></ul>
+      </div>
+      <div class="wx">
+        <div class="d">Mon</div>
+        <div class="t">62–83°</div>
+        <div class="c">Sunny</div>
+        <div class="rain" aria-hidden="true"><span style="width:0%"></span></div>
+        <ul class="wear"><li>T-shirt and sneakers</li><li>Good day for anything you missed outside</li></ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="friday" style="--c: var(--fri)">
+    <div class="day-head"><h3>Friday, Oct 9</h3><span class="tag">Outdoor day</span></div>
+    <ol class="route">
+      <li>
+        <span class="time">1:30 to 5:00 PM</span>
+        <span class="stopname">Hike Stone Mountain</span>
+        <p class="note">The walk-up trail is about a mile each way on steep granite. Do it today, since the rock gets slick in the rain.</p>
+        <p class="meta">Free hike, $20 parking per car. 25 to 30 min drive. <a href="https://www.google.com/maps/dir/?api=1&destination=Stone+Mountain+Park+Walk-Up+Trail%2C+Stone+Mountain%2C+GA">Directions</a></p>
+      </li>
+      <li>
+        <span class="time">6:30 PM</span>
+        <span class="stopname">Dinner at Colony Square</span>
+        <p class="meta">Free to walk around, pay for food. In Midtown. <a href="https://www.google.com/maps/dir/?api=1&destination=Colony+Square%2C+Atlanta%2C+GA">Directions</a></p>
+      </li>
+      <li class="optional">
+        <span class="time">Evening, optional</span>
+        <span class="stopname">CoolFit 5K Neon Night Run/Walk</span>
+        <p class="meta">Free. Check the event listing for the start location.</p>
+      </li>
+      <li>
+        <span class="time">11:55 PM</span>
+        <span class="stopname">The 420 Friday Comedy Show</span>
+        <p class="note">At the Atlanta Comedy Theater in Norcross.</p>
+        <p class="meta">Tickets from about $37. 25 to 30 min drive. <a href="https://www.google.com/maps/dir/?api=1&destination=Atlanta+Comedy+Theater%2C+Norcross%2C+GA">Directions</a></p>
+      </li>
+    </ol>
+  </section>
+
+  <section id="saturday" style="--c: var(--sat)">
+    <div class="day-head"><h3>Saturday, Oct 10</h3><span class="tag">Rain day, stay inside</span></div>
+    <ol class="route">
+      <li>
+        <span class="time">9:00 AM to 12:30 PM</span>
+        <span class="stopname">Martin Luther King Jr. National Historical Park</span>
+        <p class="note">Get there at 9 to grab Birth Home tour spots. <a href="#mlk">What to see</a></p>
+        <p class="meta">Free, with free parking. About 10 min drive. <a href="https://www.google.com/maps/dir/?api=1&destination=423+John+Wesley+Dobbs+Ave+NE%2C+Atlanta%2C+GA+30312">Directions</a></p>
+      </li>
+      <li>
+        <span class="time">12:30 PM</span>
+        <span class="stopname">Lunch at Sweet Auburn Curb Market</span>
+        <p class="meta">A covered market about 5 min from the MLK park. <a href="https://www.google.com/maps/dir/?api=1&destination=Sweet+Auburn+Curb+Market%2C+Atlanta%2C+GA">Directions</a></p>
+      </li>
+      <li>
+        <span class="time">2:00 to 4:30 PM</span>
+        <span class="stopname">World of Coca-Cola</span>
+        <p class="note">Veterans and service members get one free general admission ticket.</p>
+        <p class="meta">Adults $24.95 to $27.95, seniors $22.95 to $25.95, kids 3 to 12 $20.95 to $23.95. About 10 min drive. <a href="https://www.google.com/maps/dir/?api=1&destination=World+of+Coca-Cola%2C+Atlanta%2C+GA">Directions</a></p>
+      </li>
+      <li>
+        <span class="time">5:30 PM</span>
+        <span class="stopname">Shopping and dinner at Lenox Square</span>
+        <p class="meta">Free to visit. 15 to 20 min drive, or MARTA to Lenox station. <a href="https://www.google.com/maps/dir/?api=1&destination=Lenox+Square%2C+Atlanta%2C+GA">Directions</a></p>
+      </li>
+      <li class="optional">
+        <span class="time">If the rain stops</span>
+        <span class="stopname">Atlanta Pride Festival</span>
+        <p class="meta">Free, 10 AM to 10 PM in Piedmont Park. Take MARTA; streets nearby are closed. <a href="https://www.google.com/maps/dir/?api=1&destination=Piedmont+Park%2C+Atlanta%2C+GA">Directions</a></p>
+      </li>
+    </ol>
+  </section>
+
+  <section id="sunday" style="--c: var(--sun)">
+    <div class="day-head"><h3>Sunday, Oct 11</h3><span class="tag">Church, then an easy afternoon</span></div>
+    <ol class="route">
+      <li>
+        <span class="time">Morning</span>
+        <span class="stopname">2819 Church</span>
+        <p class="note">3350 Greenbriar Pkwy SW. Lines are long, so arrive 45 to 60 minutes early. Parking is free.</p>
+        <div class="card picker">
+          <p>Pick a service:</p>
+          <div class="seg" role="group" aria-label="Service time">
+            <button type="button" data-leave="7:00 AM" data-note="You'll be back before the noon Pride Parade closes Peachtree." aria-pressed="true">8:00 AM</button>
+            <button type="button" data-leave="9:30 AM" data-note="The Pride Parade closes Peachtree and 10th St around noon, so plan a route around it coming back." aria-pressed="false">10:30 AM</button>
+            <button type="button" data-leave="12:00 PM" data-note="The parade is underway when you leave, so avoid Peachtree on the way out." aria-pressed="false">1:00 PM</button>
+          </div>
+          <p class="leave" id="leave">Leave Midtown by 7:00 AM</p>
+          <p class="meta" id="leave-note">You'll be back before the noon Pride Parade closes Peachtree.</p>
+        </div>
+        <p class="meta" style="margin-top:8px">Free. 20 to 25 min drive. <a href="https://www.google.com/maps/dir/?api=1&destination=3350+Greenbriar+Pkwy+SW%2C+Atlanta%2C+GA+30331">Directions</a></p>
+      </li>
+      <li>
+        <span class="time">Lunch</span>
+        <span class="stopname">Ponce City Market food hall</span>
+        <p class="meta">Free to enter, pay for food. 5 to 10 min drive. <a href="https://www.google.com/maps/dir/?api=1&destination=Ponce+City+Market%2C+Atlanta%2C+GA">Directions</a></p>
+      </li>
+      <li class="optional">
+        <span class="time">If it's dry</span>
+        <span class="stopname">Walk the BeltLine Eastside Trail</span>
+        <p class="meta">Free. The trail runs right behind Ponce City Market.</p>
+      </li>
+    </ol>
+  </section>
+
+  <section id="mlk">
+    <h2>Martin Luther King Jr. National Historical Park</h2>
+    <p class="sub">Plan 2 to 3 hours. Everything here is free.</p>
+    <dl class="card facts">
+      <div><dt>Hours</dt><dd>Daily, 9 AM to 5 PM</dd></div>
+      <div><dt>Parking</dt><dd>Free lot at 423 John Wesley Dobbs Ave NE</dd></div>
+      <div><dt>Start here</dt><dd>The visitor center, temporarily at Historic Fire Station No. 6, 39 Boulevard NE. Pick up Birth Home tour tickets here.</dd></div>
+      <div><dt>Birth Home</dt><dd>501 Auburn Ave NE, reopened in summer 2026. You can only go inside on a free ranger tour. Tours hold 15 people and tickets are first come, first served on the same day.</dd></div>
+      <div><dt>Ebenezer Baptist Church</dt><dd>Where Dr. King and his father preached. Rangers lead short Church Talks daily.</dd></div>
+      <div><dt>The King Center</dt><dd>Dr. and Mrs. King's tomb, the Eternal Flame and Freedom Hall</dd></div>
+      <div><dt>Also nearby</dt><dd>The International Civil Rights Walk of Fame and the Peace Rose Garden</dd></div>
+      <div><dt>Guided tour</dt><dd>Unexpected Atlanta Tours runs a 2.5-hour walking tour (about 1.7 miles, rain or shine). It doesn't go inside the Birth Home. Book ahead.</dd></div>
+    </dl>
+  </section>
+
+  <section id="family">
+    <h2>Rainy-day picks for the family</h2>
+    <p class="sub">All indoors. Book timed tickets online, since rainy weekends sell out.</p>
+    <ul class="card family">
+      <li><b>Georgia Aquarium</b><span>Whale sharks, dolphins and sea lions</span></li>
+      <li><b>World of Coca-Cola</b><span>The tasting room is a kid favorite</span></li>
+      <li><b>Children's Museum of Atlanta</b><span>Hands-on play for ages 8 and under</span></li>
+      <li><b>Fernbank Museum</b><span>Dinosaurs and giant-screen films</span></li>
+      <li><b>College Football Hall of Fame</b><span>Interactive exhibits and an indoor field</span></li>
+      <li><b>Center for Puppetry Arts</b><span>Puppet shows and a museum, in Midtown</span></li>
+      <li><b>LEGO Discovery Center</b><span>At Phipps Plaza, best for ages 3 to 10</span></li>
+      <li><b>High Museum of Art</b><span>The I SPY! exhibit is made for families</span></li>
+      <li><b>Center for Civil and Human Rights</b><span>Pairs well with the MLK park for teens</span></li>
+      <li><b>Delta Flight Museum</b><span>Planes and a flight simulator</span></li>
+    </ul>
+  </section>
+
+  <section id="prices">
+    <h2>Prices and drive times</h2>
+    <p class="sub">Drive times are from Midtown Atlanta with normal traffic. Pride closures can add time near Piedmont Park.</p>
+    <div class="card table-wrap">
+      <table>
+        <thead><tr><th>Stop</th><th>Price</th><th>Drive</th></tr></thead>
+        <tbody>
+          <tr><td>Stone Mountain hike</td><td>Free, $20 parking per car</td><td>25–30 min</td></tr>
+          <tr><td>Colony Square</td><td>Free</td><td>0–5 min</td></tr>
+          <tr><td>CoolFit 5K Neon Night</td><td>Free</td><td>Check listing</td></tr>
+          <tr><td>420 Friday Comedy Show</td><td>From about $37</td><td>25–30 min</td></tr>
+          <tr><td>MLK National Historical Park</td><td>Free</td><td>About 10 min</td></tr>
+          <tr><td>World of Coca-Cola</td><td>$20.95 to $27.95 by age</td><td>About 10 min</td></tr>
+          <tr><td>Lenox Square</td><td>Free</td><td>15–20 min</td></tr>
+          <tr><td>2819 Church</td><td>Free</td><td>20–25 min</td></tr>
+          <tr><td>Ponce City Market</td><td>Free to enter</td><td>5–10 min</td></tr>
+          <tr><td>Atlanta BeltLine</td><td>Free</td><td>5–10 min</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <footer>
+    <p>It's Atlanta Pride weekend, so take MARTA or a rideshare in Midtown on Saturday and Sunday.</p>
+    <p>Forecast as of Thursday, October 8. Check hours and the weather before you head out.</p>
+    <button class="print" type="button" onclick="window.print()">Print this plan</button>
+  </footer>
+</main>
+
+<script>
+  (function () {
+    var buttons = document.querySelectorAll('.seg button');
+    var leave = document.getElementById('leave');
+    var note = document.getElementById('leave-note');
+    buttons.forEach(function (b) {
+      b.addEventListener('click', function () {
+        buttons.forEach(function (x) { x.setAttribute('aria-pressed', x === b ? 'true' : 'false'); });
+        leave.textContent = 'Leave Midtown by ' + b.dataset.leave;
+        note.textContent = b.dataset.note;
+      });
+    });
+  })();
+</script>
+</body>
+</html>
